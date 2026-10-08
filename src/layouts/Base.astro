@@ -62,9 +62,9 @@ if(p.theme&&p.theme!=='system')r.setAttribute('data-theme',p.theme);
 ['accent','font','contrast','motion'].forEach(function(k){var v=p[k];if(v&&v!=='lavender'&&v!=='m'&&v!=='none'&&v!=='system')r.setAttribute('data-'+k,v)});
 ['readable','links','spacing','cursor'].forEach(function(k){if(p[k])r.setAttribute('data-'+k,'on')});}catch(e){}})();
 </script>
-<link rel="stylesheet" href={`${base}styles.css`}>
-<link rel="stylesheet" href={`${base}motion.css`}>
-<link rel="stylesheet" href={`${base}theme.css`}>
+<link rel="stylesheet" href={`${base}styles.css?v=3`}>
+<link rel="stylesheet" href={`${base}motion.css?v=3`}>
+<link rel="stylesheet" href={`${base}theme.css?v=3`}>
 <script type="application/ld+json" set:html={JSON.stringify(graph)} />
 </head>
 <body>
@@ -75,7 +75,7 @@ if(p.theme&&p.theme!=='system')r.setAttribute('data-theme',p.theme);
 <Overlays />
 <script is:inline set:html={`window.I18N=${JSON.stringify(runtime)};`} />
 <script is:inline set:html={`window.SITE_CFG=${JSON.stringify(cfg)};`} />
-<script is:inline src={`${base}sound.js`} defer></script>
-<script is:inline src={`${base}app.js`} defer></script>
+<script is:inline src={`${base}sound.js?v=3`} defer></script>
+<script is:inline src={`${base}app.js?v=3`} defer></script>
 </body>
 </html>

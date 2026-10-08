@@ -1,0 +1,19 @@
+{
+  "name": "bashar",
+  "type": "module",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Portfolio of Bashar Abied (بشار عبيد), Consulting Director at PwC Middle East and Solutions & Software Architect. Built with Astro.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^5.18.2"
+  },
+  "devDependencies": {
+    "node-html-parser": "^9.0.4"
+  }
+}

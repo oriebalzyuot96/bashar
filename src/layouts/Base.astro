@@ -1,0 +1,81 @@
+---
+import { langOf, runtimeDict } from '../i18n';
+import { META, PERSON, siteCfg } from '../data/profile';
+import Chrome from '../components/sections/Chrome.astro';
+import Header from '../components/sections/Header.astro';
+import Overlays from '../components/sections/Overlays.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const lang = langOf(Astro.currentLocale);
+const L = (o: Record<string, string>) => o[lang];
+const SITE = 'https://oriebalzyuot96.github.io';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const enUrl = SITE + base, arUrl = SITE + base + 'ar/';
+const canonical = lang === 'ar' ? arUrl : enUrl;
+const title = L(META.title), description = L(META.desc);
+const ogImage = `${SITE}${base}assets/bashar.jpg`;
+const graph = { '@context': 'https://schema.org', '@graph': [
+  { '@type': 'Person', '@id': `${enUrl}#bashar`, name: 'Bashar Abied', alternateName: ['بشار عبيد'], jobTitle: 'Consulting Director',
+    description: 'Consulting Director at PwC Middle East, former CTO and Solutions & Software Architect with 25+ years delivering mission-critical systems for governments, telcos and enterprises across the Middle East.',
+    image: ogImage, url: enUrl, email: `mailto:${PERSON.email}`, telephone: PERSON.tel,
+    address: { '@type': 'PostalAddress', addressLocality: 'Amman', addressCountry: 'JO' },
+    worksFor: { '@type': 'Organization', name: 'PwC Middle East' },
+    alumniOf: { '@type': 'CollegeOrUniversity', name: 'Jordan University of Science and Technology' },
+    knowsLanguage: ['ar', 'en'], knowsAbout: ['Solution architecture', 'Enterprise architecture', 'Technology leadership', 'Programme delivery', 'e-Government', 'Telecom provisioning', 'SOA and integration', 'J2EE', '.NET', 'Oracle SOA', 'Artificial intelligence'],
+    sameAs: [PERSON.linkedin] },
+  { '@type': 'ProfilePage', url: canonical, name: title, inLanguage: lang, mainEntity: { '@id': `${enUrl}#bashar` } },
+  { '@type': 'VideoObject', '@id': `${enUrl}#intro`, name: lang === 'ar' ? 'بشار عبيد: من بوسطن إلى PwC' : 'Bashar Abied: from Boston to PwC',
+    description: lang === 'ar' ? 'فيديو قصير عن الشركات والبرامج الوطنية خلف أكثر من 25 عامًا من التسليم.' : 'A 40-second reel of the companies and national programmes behind 25+ years of delivery.',
+    thumbnailUrl: `${SITE}${base}assets/bashar-intro-poster.jpg`, contentUrl: `${SITE}${base}assets/bashar-intro.mp4`,
+    uploadDate: '2026-10-09', duration: 'PT40S', inLanguage: ['en', 'ar'], creator: { '@id': `${enUrl}#bashar` } },
+] };
+const cfg = siteCfg(base);
+const runtime = { ...runtimeDict(Astro.currentLocale), 'toast.copied': lang === 'ar' ? 'تم النسخ ✓' : 'Copied ✓' };
+---
+<!doctype html>
+<html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'} class="no-js" data-base={base} data-cv={`${base}Bashar-Abied-CV.pdf`}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{title}</title>
+<meta name="description" content={description}>
+<meta name="author" content="Bashar Abied">
+<link rel="canonical" href={canonical}>
+<link rel="alternate" hreflang="en" href={enUrl}>
+<link rel="alternate" hreflang="ar" href={arUrl}>
+<link rel="alternate" hreflang="x-default" href={enUrl}>
+<meta property="og:type" content="profile">
+<meta property="og:url" content={canonical}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:image" content={ogImage}>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1d3a63">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%231d3a63'/><stop offset='1' stop-color='%23a07c1e'/></linearGradient></defs><rect width='64' height='64' rx='18' fill='url(%23g)'/><text x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='800' font-size='26' fill='white'>BA</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Atkinson+Hyperlegible:wght@400;700&family=Gaegu:wght@700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script is:inline>
+(function(){var r=document.documentElement;r.classList.remove('no-js');try{var p=JSON.parse(localStorage.getItem('ba-prefs')||'{}');
+if(p.theme&&p.theme!=='system')r.setAttribute('data-theme',p.theme);
+['accent','font','contrast','motion'].forEach(function(k){var v=p[k];if(v&&v!=='lavender'&&v!=='m'&&v!=='none'&&v!=='system')r.setAttribute('data-'+k,v)});
+['readable','links','spacing','cursor'].forEach(function(k){if(p[k])r.setAttribute('data-'+k,'on')});}catch(e){}})();
+</script>
+<link rel="stylesheet" href={`${base}styles.css`}>
+<link rel="stylesheet" href={`${base}motion.css`}>
+<link rel="stylesheet" href={`${base}theme.css`}>
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />
+</head>
+<body>
+<Chrome />
+<Header />
+<main id="main"><slot /></main>
+<SiteFooter />
+<Overlays />
+<script is:inline set:html={`window.I18N=${JSON.stringify(runtime)};`} />
+<script is:inline set:html={`window.SITE_CFG=${JSON.stringify(cfg)};`} />
+<script is:inline src={`${base}sound.js`} defer></script>
+<script is:inline src={`${base}app.js`} defer></script>
+</body>
+</html>

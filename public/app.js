@@ -70,7 +70,7 @@
     return BASE + (lang === 'ar' ? 'ar/' : '') + rest + location.hash;
   }
   function goLang(lang) { location.href = altPath(lang); }
-  { const v = $('#introVideo'); if (v && v.textTracks) [...v.textTracks].forEach(tr => { tr.mode = tr.language === PAGE_LANG ? 'showing' : 'disabled'; }); }
+  { const v = $('#introVideo'); if (v && v.textTracks) [...v.textTracks].forEach(tr => { tr.mode = 'disabled'; }); }
 
   /* ───────── controls ───────── */
   $$('[data-pref]').forEach(g => {

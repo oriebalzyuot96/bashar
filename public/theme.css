@@ -51,3 +51,4 @@
 /* brass accents */
 .rot::after{background:#c9a227;opacity:.3}
 .sec-title h2::after{background:linear-gradient(90deg,var(--accent),#c9a227)}
+#introVideo::cue{font-size:.8em;background:rgb(0 0 0 / .6)}
